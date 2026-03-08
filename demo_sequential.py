@@ -9,13 +9,13 @@ def say_hello(date):
     print(f"Hello Airflow! : {date}")
 
 with DAG(
-    dag_id='demo',
+    dag_id='demo_sequential',
     default_args={
         'depends_on_past': False,
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='demo',
+    description='demo_sequential',
     start_date=one_day_ago,
     schedule=None,
 ) as dag:
