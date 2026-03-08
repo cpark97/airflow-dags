@@ -22,14 +22,15 @@ with DAG(
     start = EmptyOperator(task_id='start')
 
     prev_task = start
-    end_date = datetime.strptime('2026-03-07')
+    end_date = datetime.strptime('2026-03-07', '%Y-%m-%d')
     date = end_date - timedelta(days=7)
 
     while date <= end_date:
+        date_str = date.strftime('%Y-%m-%d')
         hello_task = PythonOperator(
-            task_id=f'hello_task_{date}',
+            task_id=f'hello_task_{date_str}',
             python_callable=say_hello,
-            op_kwargs={"date": date}
+            op_kwargs={"date": date_str}
         )
         prev_task >> hello_task
         prev_task = hello_task
